@@ -1,62 +1,69 @@
-// this is the style you want to emulate.
-// This is the canonical layout file for the Quantum project. If you want to add another keyboard,
-
 #include QMK_KEYBOARD_H
 
-// Each layer gets a name for readability, which is then used in the keymap matrix below.
-// The underscores don't mean anything - you can have a layer called STUFF or any other name.
-// Layer names don't all need to be of the same length, obviously, and you can also skip them
-// entirely and just use numbers.
-#define _QW 0
-#define _RS 1
-#define _LW 2
+// Layer names
+#define L_LETTER 0
+#define L_SYMBOL 1
+
+// Custom key identifiers
+#define LTHUMB  LCTL_T(KC_UP)
+#define RTHUMB  LALT_T(KC_DOWN)
+#define KC_BOOT RESET
+
+enum custom_keycodes {
+  M_COLON = SAFE_RANGE,
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_QW] = LAYOUT( /* Qwerty */
-    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
-    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
-    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
-    KC_ESC, KC_TAB, KC_LGUI,  KC_LSFT, KC_BSPC,  KC_LCTL, KC_LALT, KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
+  /* 0: letters
+   *
+   *  :     ,     .     p     y       ||         f    g    c    r    l
+   *  a     o     e     u     i       ||         d    h    t    n    s
+   *  '     q     j     k     x       ||         b    m    w    v    z
+   *  esc  tab  super shift bspc c/up || m/down spc layer  -    /   enter
+   */
+  [L_LETTER] = LAYOUT(
+    M_COLON, KC_COMM, KC_DOT,  KC_P,      KC_Y,                    KC_F,   KC_G,         KC_C,    KC_R,    KC_L,
+    KC_A,    KC_O,    KC_E,    KC_U,      KC_I,                    KC_D,   KC_H,         KC_T,    KC_N,    KC_S,
+    KC_QUOT, KC_Q,    KC_J,    KC_K,      KC_X,                    KC_B,   KC_M,         KC_W,    KC_V,    KC_Z,
+    KC_ESC,  KC_TAB,  KC_LGUI, KC_LSHIFT, KC_BSPC, LTHUMB, RTHUMB, KC_SPC, MO(L_SYMBOL), KC_MINS, KC_SLSH, KC_ENT
   ),
 
-  /*
-   *  !       @     up     {    }        ||     pgup    7     8     9    *
-   *  #     left   down  right  $        ||     pgdn    4     5     6    +
-   *  [       ]      (     )    &        ||       `     1     2     3    \
-   * lower  insert super shift bksp ctrl || alt space   fn    .     0    =
+  /* 1: fn with undvorak-ized punctuation
+   *
+   *  ~    @      ^     $    %        ||       F4    7     8     9    *
+   *  !    &      {     (    [        ||       F3    4     5     6    +
+   *  \    |      }     )    ]        ||       `     1     2     3    -
+   *     insert super   =  bkspc del  || boot  spc   fn    .     0    #
    */
-  [_RS] = LAYOUT( /* [> RAISE <] */
-    KC_EXLM, KC_AT,   KC_UP,   KC_LCBR, KC_RCBR,                   KC_PGUP, KC_7,    KC_8,   KC_9, KC_ASTR ,
-    KC_HASH, KC_LEFT, KC_DOWN, KC_RGHT, KC_DLR,                    KC_PGDN, KC_4,    KC_5,   KC_6, KC_PLUS ,
-    KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_AMPR,                   KC_GRV,  KC_1,    KC_2,   KC_3, KC_BSLS ,
-    TG(_LW), KC_INS,  KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, KC_SPC,  KC_TRNS, KC_DOT, KC_0, KC_EQL  ),
-  /*
-   * insert home   up  end   pgup       ||      up     F7    F8    F9   F10
-   *  del   left  down right pgdn       ||     down    F4    F5    F6   F11
-   *       volup             reset      ||             F1    F2    F3   F12
-   *       voldn  super shift bksp ctrl || alt space   L0  prtsc scroll pause
-   */
-  [_LW] = LAYOUT( /* [> LOWER <] */
-    KC_INS,  KC_HOME, KC_UP,   KC_END,  KC_PGUP,                   KC_UP,   KC_F7,   KC_F8,   KC_F9,   KC_F10  ,
-    KC_DELT, KC_LEFT, KC_DOWN, KC_RGHT, KC_DOWN,                   KC_DOWN, KC_F4,   KC_F5,   KC_F6,   KC_F11  ,
-    KC_NO,   KC_VOLU, KC_NO,   KC_NO,   RESET,                     KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F12  ,
-    KC_NO,   KC_VOLD, KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, KC_SPC,  TO(_QW), KC_PSCR, KC_SLCK, KC_PAUS )
+  [L_SYMBOL] = LAYOUT(
+    KC_TILD, KC_AT,   KC_CIRC, KC_DOLLAR, KC_PERC,                  KC_F4,   KC_7,    KC_8,   KC_9, KC_ASTR ,
+    KC_EXLM, KC_AMPR, KC_LCBR, KC_LPRN,   KC_LBRC,                  KC_F3,   KC_4,    KC_5,   KC_6, KC_PLUS ,
+    KC_BSLS, KC_PIPE, KC_RCBR, KC_RPRN,   KC_RBRC,                  KC_GRV,  KC_1,    KC_2,   KC_3, KC_MINS ,
+    KC_NO,   KC_INS,  KC_LGUI, KC_EQL,    KC_BSPC, KC_DEL, KC_BOOT, KC_SPC,  KC_TRNS, KC_DOT, KC_0, KC_HASH
+  ),
 };
 
-const uint16_t PROGMEM fn_actions[] = {
-
-};
-
-const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
-  // MACRODOWN only works in this function
-  switch(id) {
-    case 0:
-      if (record->event.pressed) {
-        register_code(KC_RSFT);
-      } else {
-        unregister_code(KC_RSFT);
-      }
-    break;
+void invert_shift_behaviour(uint16_t keycode) {
+  if (keyboard_report->mods & MOD_BIT(KC_LSFT)) {
+    unregister_code(KC_LSFT);
+    register_code(keycode);
+    unregister_code(keycode);
+    register_code(KC_LSFT);
+  } else {
+    register_code(KC_LSFT);
+    register_code(keycode);
+    unregister_code(keycode);
+    unregister_code(KC_LSFT);
   }
-  return MACRO_NONE;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+    switch(keycode) {
+      case M_COLON:
+        invert_shift_behaviour(KC_SCLN);
+        break;
+    }
+  }
+  return true;
 };
