@@ -16,7 +16,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |   ~    |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |           |  F7  |  F8  |  F9  | F10  | F11  | F12  |   =    |
+ * |   ~    |   7  |   5  |  3   |  1   |  9   |  F3  |           |  F4  |  0   |  2   |  4   |  6   |  8   |   =    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |   `    |   ;  |   ,  |   .  |   p  |   y  | BkTb |           | Tab  |   f  |   g  |   c  |   r  |   l  |   |    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -27,32 +27,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |  [   |  {   |  !   |  %   | ^, S |                                       | $, S |  -   |   +  |   /  |  *   |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        | <Nav | Nav U|       | Nav D| Nav>   |
- *                                 ,------|------|------|       |------+--------+------.
- *                                 |Bkspc |      | < Mv |       | Mv > |        | SPC  |
- *                                 |  /   |  Up  |------|       |------|  Down  |  /   |
- *                                 | Meta |      | Left |       | Right|        |Hyper |
- *                                 `--------------------'       `----------------------'
+ *                                        | <Nav | Nav U|       | Nav D| Nav> |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |Bkspc |      | < Mv |       | Mv > |      | SPC  |
+ *                                 |  /   |  Up  |------|       |------| Down |  /   |
+ *                                 | Meta |      | Left |       | Right|      |Hyper |
+ *                                 `--------------------'       `--------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
-        KC_TILD,             KC_F1, KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,
-        KC_PLUS,             KC_Q,  KC_W,   KC_E,   KC_R,   KC_T,   LSFT(KC_TAB),
-        MT(MOD_LCTL, KC_ESC),KC_A,  KC_S,   KC_D,   KC_F,   KC_G,
-        KC_5,                KC_Z,  KC_X,   KC_C,   KC_V,   KC_B,   KC_1,
-                  KC_2,      KC_3,  KC_MINS,KC_EXLM,MT(MOD_LSFT, KC_RCBR),
+        KC_TILD,             LSFT(KC_2),  LSFT(KC_3),  LSFT(KC_4), LSFT(KC_5),LSFT(KC_6),KC_F3,
+        KC_PLUS,             KC_Q,        KC_W,        KC_E,       KC_R,      KC_T,   LSFT(KC_TAB),
+        MT(MOD_LCTL, KC_ESC),KC_A,        KC_S,        KC_D,       KC_F,      KC_G,
+        KC_5,                KC_Z,        KC_X,        KC_C,       KC_V,      KC_B,   KC_1,
+                  KC_2,      KC_3,        KC_MINS,     KC_EXLM,    MT(MOD_LSFT, KC_RBRC),
 
                                                  LGUI(KC_J), LGUI(KC_K),
                                                              LGUI(LSFT(KC_J)),
                           MT(MOD_LALT, KC_BSPC), KC_UP,      KC_LEFT,
         // right hand
-        KC_F7,  KC_F8,   KC_F9,   KC_F10, KC_F11,     KC_F12,           KC_6,
-        KC_TAB, KC_Y,    KC_U,    KC_I,   KC_O,       KC_P,             KC_PIPE,
-                KC_H,    KC_J,    KC_K,   KC_L,       LT(MDIA, KC_SCLN),KC_ENT,
-        KC_EQL, KC_N,    KC_M,    KC_COMM,KC_DOT,     CTL_T(KC_SLSH),   KC_LBRACKET,
-            MT(MOD_RSFT, KC_GRV), KC_QUOT,KC_9,       KC_LBRC,          KC_7,
+        KC_F4,           LSFT(KC_7), LSFT(KC_8), LSFT(KC_9),  LSFT(KC_0), LSFT(KC_MINS),  KC_6,
+        KC_TAB,          KC_Y,       KC_U,       KC_I,        KC_O,       KC_P,           KC_PIPE,
+                         KC_H,       KC_J,       KC_K,        KC_L,       KC_SCOLON,      KC_ENT,
+        KC_EQL,          KC_N,       KC_M,       KC_COMM,     KC_DOT,     CTL_T(KC_SLSH), KC_LBRACKET,
+            MT(MOD_RSFT, KC_GRV),    KC_QUOT,    KC_9,        KC_LBRC,    KC_7,
 
         LGUI(KC_L),  LGUI(KC_P),
         LGUI(LSFT(KC_P)),
