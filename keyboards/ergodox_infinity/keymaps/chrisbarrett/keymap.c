@@ -22,9 +22,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | C,Esc  |   a  |   o  |   e  |   u  |   i  |------|           |------|   d  |   h  |   t  |   n  |  s   | Enter  |
  * |--------+------+------+------+------+------| BkTb |           | Tab  |------+------+------+------+------+--------|
- * |   (    |   '  |   q  |   j  |   k  |   x  |      |           |      |   b  |   m  |   w  |   v  |  z   |   @    |
+ * |   (    |   '  |   q  |   j  |   k  |   x  |      |           |      |   b  |   m  |   w  |   v  |  z   |   )    |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |  [   |  {   | Hyper| Meta |  S   |                                       |   S  |  -   |   +  |   /  |  #   |
+ *   |  [   |  {   | Hyper| Meta |  S   |                                       |   S  |  -   |   /  |   @  |  #   |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        | <Nav | Nav U|       | Nav D| Nav> |
@@ -50,10 +50,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
         // right hand
         KC_F4,           KC_7,       KC_8,       KC_9,        KC_0,       KC_MINS,        KC_F12,
-        KC_GRV,          KC_Y,       KC_U,       KC_I,        KC_O,       KC_P,           KC_PIPE,
+        KC_GRV,          KC_Y,       KC_U,       KC_I,        KC_O,       KC_P,           KC_BSLASH,
                          KC_H,       KC_J,       KC_K,        KC_L,       KC_SCOLON,      KC_ENT,
-        KC_TAB,          KC_N,       KC_M,       KC_COMM,     KC_DOT,     KC_SLSH,        KC_RBRACKET,
-                                     KC_RSFT,    KC_QUOT,     KC_9,       KC_LBRACKET,    KC_EQL,
+        KC_TAB,          KC_N,       KC_M,       KC_COMM,     KC_DOT,     KC_SLSH,        KC_8,
+                                     KC_RSFT,    KC_QUOT,     KC_LBRACKET,KC_RBRACKET,    KC_EQL,
 
         LGUI(KC_L),  LGUI(KC_P),
         LGUI(LSFT(KC_P)),
